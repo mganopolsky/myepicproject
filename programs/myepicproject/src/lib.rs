@@ -10,7 +10,16 @@ pub mod myepicproject {
     base_account.total_gifs = 0;
     Ok(())
   }
-  
+
+  pub fn clear_gifs(ctx: Context<AddGif>) -> Result <()> {
+    let base_account = &mut ctx.accounts.base_account;
+    let user = &mut ctx.accounts.user;
+
+    base_account.gif_list = Vec::new();
+    base_account.total_gifs = 0;
+    Ok(())
+  }
+
   pub fn add_gif(ctx: Context<AddGif>, gif_link: String) -> Result <()> {
     let base_account = &mut ctx.accounts.base_account;
     let user = &mut ctx.accounts.user;
