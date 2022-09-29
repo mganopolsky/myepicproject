@@ -20,13 +20,14 @@ pub mod myepicproject {
     Ok(())
   }
 
-  pub fn add_gif(ctx: Context<AddGif>, gif_link: String) -> Result <()> {
+  pub fn add_gif(ctx: Context<AddGif>, gif_link: String, comment_text: String) -> Result <()> {
     let base_account = &mut ctx.accounts.base_account;
     let user = &mut ctx.accounts.user;
 
     let item = ItemStruct{
         gif_link: gif_link.to_string(),
         user_address: *user.to_account_info().key,
+        gif_comment: comment_text.to_string(),
     };
 
     base_account.gif_list.push(item);
@@ -56,6 +57,7 @@ pub struct AddGif<'info> {
 pub struct ItemStruct {
   pub gif_link: String,
   pub user_address: Pubkey,
+  pub gif_comment: String,
 }
 
 #[account]
