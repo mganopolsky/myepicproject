@@ -16,6 +16,7 @@ pub mod myepicproject {
     let user = &mut ctx.accounts.user;
 
     base_account.gif_list = Vec::new();
+    //base_account.votes_count = Vec::new();
     base_account.total_gifs = 0;
     Ok(())
   }
@@ -31,6 +32,7 @@ pub mod myepicproject {
     };
 
     base_account.gif_list.push(item);
+    //base_account.votes_count.push(0);
     base_account.total_gifs += 1;
     Ok(())
   }
