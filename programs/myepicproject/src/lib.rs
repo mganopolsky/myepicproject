@@ -8,15 +8,17 @@ pub mod myepicproject {
   pub fn start_stuff_off(ctx: Context<StartStuffOff>) -> Result <()> {
     let base_account = &mut ctx.accounts.base_account;
     base_account.total_gifs = 0;
+    base_account.gif_list = Vec::new();
+    //base_account.gif_votes = Vec::new();
     Ok(())
   }
 
   pub fn clear_gifs(ctx: Context<ClearGifs>) -> Result <()> {
-    let base_account = &mut ctx.accounts.base_account;
-    let user = &mut ctx.accounts.user;
+    let mut base_account = &mut ctx.accounts.base_account;
+    //let user = &mut ctx.accounts.user;
 
     base_account.gif_list = Vec::new();
-    //base_account.votes_count = Vec::new();
+    //base_account.gif_votes = Vec::new();
     base_account.total_gifs = 0;
     Ok(())
   }
@@ -27,12 +29,11 @@ pub mod myepicproject {
 
     let item = ItemStruct{
         gif_link: gif_link.to_string(),
-        //gif_comment: gif_link.to_string(),
         user_address: *user.to_account_info().key,
+        gif_description: gif_link.to_string(),
     };
 
     base_account.gif_list.push(item);
-    //base_account.votes_count.push(0);
     base_account.total_gifs += 1;
     Ok(())
   }
@@ -66,12 +67,13 @@ pub struct ClearGifs<'info> {
 #[derive(Debug, Clone, AnchorSerialize, AnchorDeserialize)]
 pub struct ItemStruct {
   pub gif_link: String,
-  //pub gif_comment: String,
   pub user_address: Pubkey,
+  pub gif_description: String,
 }
 
 #[account]
 pub struct BaseAccount {
     pub total_gifs: u64,
     pub gif_list: Vec<ItemStruct>,
+    //pub gif_votes: Vec<u64>,
 }

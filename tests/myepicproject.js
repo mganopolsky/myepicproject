@@ -38,6 +38,17 @@ const main = async () => {
 
   console.log("👀 GIF List", account.gifList);
 
+  tx = await program.rpc.addGif(
+    "https://www.code-art.com/wp-content/uploads/2022/04/Fatima-Hernandez-6th-grade.png",
+    {
+      accounts: {
+        baseAccount: baseAccount.publicKey,
+        user: provider.wallet.publicKey,
+      },
+    }
+  );
+  console.log("📝 Your transaction signature", tx);
+
   console.log("Clearing GIFS:");
 
   tx = await program.rpc.clearGifs({
