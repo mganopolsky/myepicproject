@@ -34,7 +34,7 @@ pub mod myepicproject {
     };
 
     base_account.gif_list.push(item);
-    base_account.total_gifs += 1;
+    base_account.total_gifs =  base_account.total_gifs + 1;
     Ok(())
   }
 }
@@ -73,7 +73,7 @@ pub struct ItemStruct {
 
 #[account]
 pub struct BaseAccount {
-    pub total_gifs: u64,
+    pub total_gifs: u32,
     pub gif_list: Vec<ItemStruct>,
     //pub gif_votes: Vec<u64>,
 }
